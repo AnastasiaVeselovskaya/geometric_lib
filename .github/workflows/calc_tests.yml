@@ -51,6 +51,3 @@ jobs:
 
       - name: Codestyle check
         run: flake8 .
-
-      - name: Format code
-        run: black .

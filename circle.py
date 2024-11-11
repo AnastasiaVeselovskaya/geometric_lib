@@ -13,4 +13,3 @@ def perimeter(r):
     # Параметры: r (int) - радиус окружности;
     # Возвращаемое значение: math.pi * r * r (float) - радиус.
     return 2 * math.pi * r
-

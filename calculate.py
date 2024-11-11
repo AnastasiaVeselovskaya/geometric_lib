@@ -1,10 +1,10 @@
 import circle
 import square
 
-
 figs = ['circle', 'square', 'triangle']
 funcs = ['perimeter', 'area']
 sizes = {}
+
 
 def calc(fig, func, size):
     # Выполняет заданную пользователем функцию для определённой фигуры.
@@ -15,7 +15,7 @@ def calc(fig, func, size):
     # Примечание: если задана функция main, calc принимает параметры с консоли. Вывод не меняется.
 
     if fig not in figs:
-        raise ValueError(f"Figure '{fig}' is not a valid figure.")  # теперь выбрасываем исключение, если фигура некорректна
+        raise ValueError(f"Figure '{fig}' is not a valid figure.")
 
     if func not in funcs:
         raise ValueError(f"Function '{func}' is not a valid function for figure '{fig}'.")
@@ -35,17 +35,18 @@ def calc(fig, func, size):
 
 
 if __name__ == "__main__":
-	func = ''
-	fig = ''
-	size = list()
-    
-	while fig not in figs:
-		fig = input(f"Enter figure name, avaliable are {figs}:\n")
-	
-	while func not in funcs:
-		func = input(f"Enter function name, avaliable are {funcs}:\n")
-	
-	while len(size) != sizes.get(f"{func}-{fig}", 1):
-		size = list(map(int, input("Input figure sizes separated by space, 1 for circle and square, 2-3 for triangle\n").split(' ')))
-	
-	calc(fig, func, size)
+    func = ''
+    fig = ''
+    size = list()
+
+    while fig not in figs:
+        fig = input(f"Enter figure name, available are {figs}:\n")
+
+    while func not in funcs:
+        func = input(f"Enter function name, available are {funcs}:\n")
+
+    while len(size) != sizes.get(f"{func}-{fig}", 1):
+        size = list(map(int, input(
+            "Input figure sizes separated by space, 1 for circle and square, 2-3 for triangle\n").split(' ')))
+
+    calc(fig, func, size)

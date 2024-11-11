@@ -1,6 +1,7 @@
 import pytest
 import triangle
 
+
 def test_triangle_area():
     height = 6
     side = 45
@@ -8,6 +9,7 @@ def test_triangle_area():
     result = triangle.area(side, height)
 
     assert result == 135
+
 
 def test_triangle_perimeter():
     side_a = 3
