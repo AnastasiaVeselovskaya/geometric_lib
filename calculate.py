@@ -17,6 +17,22 @@ def calc(fig, func, size):
 	assert fig in figs
 	assert func in funcs
 
+	if fig == 'circle':
+		if len(size) != 1 or not all(isinstance(x, (int, float)) and x > 0 for x in size):
+			raise ValueError(f"Size for figure '{fig}' must be a positive number (radius).")
+	elif fig == 'square':
+		if len(size) != 1 or not all(isinstance(x, (int, float)) and x > 0 for x in size):
+			raise ValueError(f"Size for figure '{fig}' must be a positive number (side length).")
+	elif fig == 'triangle':
+		if len(size) != 2 or not all(isinstance(x, (int, float)) and x > 0 for x in size):
+			raise ValueError(f"Size for figure '{fig}' must contain two positive numbers (base and height).")
+
+
+	if fig not in figs:
+		raise ValueError(f"Figure '{fig}' is not a valid figure.")
+	if func not in funcs:
+		raise ValueError(f"Function '{func}' is not a valid function for figure '{fig}'.")
+
 	result = eval(f'{fig}.{func}(*{size})')
 	return result
 
