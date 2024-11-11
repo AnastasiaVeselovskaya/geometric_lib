@@ -14,9 +14,6 @@ on:
 jobs:
   calculate_test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: math_tests/
 
     strategy:
       matrix:
