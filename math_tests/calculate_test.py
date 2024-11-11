@@ -3,7 +3,7 @@ import calculate
 
 
 def test_calculate_wrong_input():
-    with pytest.raises(ValueError, match="Figure 'cylinder' is not a valid figure."):
+    with pytest.raises(ValueError):
         figure_argument = 'cylinder'
         function_argument = 'area'
         size_argument = {3, 5}

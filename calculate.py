@@ -6,29 +6,33 @@ funcs = ['perimeter', 'area']
 sizes = {}
 
 
+def validate_size(fig, size, expected_len):
+    if len(size) != expected_len:
+        raise ValueError(f"Size must be {expected_len} positive number(s).")
+
+    if not all(isinstance(x, (int, float)) and x > 0 for x in size):
+        raise ValueError(f"Size for '{fig}' must be a positive number.")
+
 def calc(fig, func, size):
     # Выполняет заданную пользователем функцию для определённой фигуры.
     # Параметры: fig (str) - фигура, для которой требуется провести расчёты;
     #             func (str) - функция, соответствующая необходимым расчётам;
     #             size (arr) - параметры фигуры.
-    # Возвращаемое значение: выводит в консоль название, фигуру и значение заданной функции.
-    # Примечание: если задана функция main, calc принимает параметры с консоли. Вывод не меняется.
+    # Возвращаемое значение: выводит в консоль название,
+    # фигуру и значение заданной функции.
+    # Примечание: если задана функция main, calc
+    # принимает параметры с консоли. Вывод не меняется.
 
     if fig not in figs:
-        raise ValueError(f"Figure '{fig}' is not a valid figure.")
+        raise ValueError(f"Figure '{fig}' is not valid.")
 
     if func not in funcs:
-        raise ValueError(f"Function '{func}' is not a valid function for figure '{fig}'.")
+        raise ValueError(f"Function '{func}' is not valid function.")
 
-    if fig == 'circle':
-        if len(size) != 1 or not all(isinstance(x, (int, float)) and x > 0 for x in size):
-            raise ValueError(f"Size for figure '{fig}' must be a positive number (radius).")
-    elif fig == 'square':
-        if len(size) != 1 or not all(isinstance(x, (int, float)) and x > 0 for x in size):
-            raise ValueError(f"Size for figure '{fig}' must be a positive number (side length).")
+    if fig in ['circle', 'square']:
+        validate_size(fig, size, expected_len=1)
     elif fig == 'triangle':
-        if len(size) != 2 or not all(isinstance(x, (int, float)) and x > 0 for x in size):
-            raise ValueError(f"Size for figure '{fig}' must contain two positive numbers (base and height).")
+        validate_size(fig, size, expected_len=2)
 
     result = eval(f'{fig}.{func}(*{size})')
     return result
@@ -47,6 +51,6 @@ if __name__ == "__main__":
 
     while len(size) != sizes.get(f"{func}-{fig}", 1):
         size = list(map(int, input(
-            "Input figure sizes separated by space, 1 for circle and square, 2-3 for triangle\n").split(' ')))
+            "Input figure sizes separated by space\n").split(' ')))
 
     calc(fig, func, size)
