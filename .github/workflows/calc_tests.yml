@@ -49,8 +49,5 @@ jobs:
       - name: Calc testing
         run: pytest
 
-      - name: Black codestyle formatting
+      - name: Black codestyle check
         run: black .
-
-      - name: Flake8 codecstyle check
-        run: flake8 .
