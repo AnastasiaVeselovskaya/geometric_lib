@@ -2,7 +2,7 @@ import circle
 import square
 
 
-figs = ['circle', 'square']
+figs = ['circle', 'square', 'triangle']
 funcs = ['perimeter', 'area']
 sizes = {}
 
@@ -10,14 +10,15 @@ def calc(fig, func, size):
 	# Выполняет заданную пользователем функцию для определённой фигуры.
 	# Параметры: fig (str) - фигура, для которой требуется провести расчёты; 
 	#			 func (str) - функция, соответствующая необходимым расчётам;
-	#			 size (arra) - параметры фигуры.
+	#			 size (arr) - параметры фигуры.
 	# Возвращаемое значение: выводит в консоль название, фигуру и значение заданной функции.
 	# Примечание: если задана функция main, calc принимает параметры  с консоли. Вывод не меняется.
+
 	assert fig in figs
 	assert func in funcs
 
 	result = eval(f'{fig}.{func}(*{size})')
-	print(f'{func} of {fig} is {result}')
+	return result
 
 if __name__ == "__main__":
 	func = ''
@@ -31,9 +32,6 @@ if __name__ == "__main__":
 		func = input(f"Enter function name, avaliable are {funcs}:\n")
 	
 	while len(size) != sizes.get(f"{func}-{fig}", 1):
-		size = list(map(int, input("Input figure sizes separated by space, 1 for circle and square\n").split(' ')))
+		size = list(map(int, input("Input figure sizes separated by space, 1 for circle and square, 2-3 for triangle\n").split(' ')))
 	
 	calc(fig, func, size)
-
-
-
