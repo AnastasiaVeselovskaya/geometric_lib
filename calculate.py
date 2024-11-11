@@ -50,7 +50,7 @@ if __name__ == "__main__":
         func = input(f"Enter function name, available are {funcs}:\n")
 
     while len(size) != sizes.get(f"{func}-{fig}", 1):
-        size = list(map(int, input(
-            "Input figure sizes separated by space\n").split(' ')))
+        user_input = input("Input figure sizes separated by space\n")
+        size = list(map(int, user_input.split(' ')))
 
     calc(fig, func, size)
