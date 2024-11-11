@@ -1,0 +1,53 @@
+name: Calculate Tests
+
+on:
+  push:
+    branches:
+      - main
+      - release
+  pull_request:
+    branches:
+      - main
+      - release
+      - develop
+
+jobs:
+  calculate_test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.13]
+
+    env:
+      SURNAME: Веселовская
+      NAME: Анастасия
+      LAST_NAME: Евгеньевна
+      GROUP_NUMBER: M3111
+
+    steps:
+      - name: Output personal information
+        run: |
+          echo "ФИО: ${{ env.SURNAME }} ${{ env.NAME }} ${{ env.LAST_NAME }}"
+          echo "Номер группы: ${{ env.GROUP_NUMBER }}"
+          echo "GitHub: ${{ github.actor }}"
+
+      - name: Git Checkout
+        uses: actions/checkout@v3
+
+      - name: Set PYTHONPATH to include the geometric_lib directory
+        run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
+
+      - name: Python installation
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Dependencies installation
+        run: pip install -r requirements.txt
+
+      - name: Calc testing
+        run: pytest
+
+      - name: Black codestyle check
+        run: black .
