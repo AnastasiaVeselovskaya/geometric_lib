@@ -7,34 +7,32 @@ funcs = ['perimeter', 'area']
 sizes = {}
 
 def calc(fig, func, size):
-	# Выполняет заданную пользователем функцию для определённой фигуры.
-	# Параметры: fig (str) - фигура, для которой требуется провести расчёты; 
-	#			 func (str) - функция, соответствующая необходимым расчётам;
-	#			 size (arr) - параметры фигуры.
-	# Возвращаемое значение: выводит в консоль название, фигуру и значение заданной функции.
-	# Примечание: если задана функция main, calc принимает параметры  с консоли. Вывод не меняется.
+    # Выполняет заданную пользователем функцию для определённой фигуры.
+    # Параметры: fig (str) - фигура, для которой требуется провести расчёты;
+    #             func (str) - функция, соответствующая необходимым расчётам;
+    #             size (arr) - параметры фигуры.
+    # Возвращаемое значение: выводит в консоль название, фигуру и значение заданной функции.
+    # Примечание: если задана функция main, calc принимает параметры с консоли. Вывод не меняется.
 
-	assert fig in figs
-	assert func in funcs
+    if fig not in figs:
+        raise ValueError(f"Figure '{fig}' is not a valid figure.")  # теперь выбрасываем исключение, если фигура некорректна
 
-	if fig == 'circle':
-		if len(size) != 1 or not all(isinstance(x, (int, float)) and x > 0 for x in size):
-			raise ValueError(f"Size for figure '{fig}' must be a positive number (radius).")
-	elif fig == 'square':
-		if len(size) != 1 or not all(isinstance(x, (int, float)) and x > 0 for x in size):
-			raise ValueError(f"Size for figure '{fig}' must be a positive number (side length).")
-	elif fig == 'triangle':
-		if len(size) != 2 or not all(isinstance(x, (int, float)) and x > 0 for x in size):
-			raise ValueError(f"Size for figure '{fig}' must contain two positive numbers (base and height).")
+    if func not in funcs:
+        raise ValueError(f"Function '{func}' is not a valid function for figure '{fig}'.")
 
+    if fig == 'circle':
+        if len(size) != 1 or not all(isinstance(x, (int, float)) and x > 0 for x in size):
+            raise ValueError(f"Size for figure '{fig}' must be a positive number (radius).")
+    elif fig == 'square':
+        if len(size) != 1 or not all(isinstance(x, (int, float)) and x > 0 for x in size):
+            raise ValueError(f"Size for figure '{fig}' must be a positive number (side length).")
+    elif fig == 'triangle':
+        if len(size) != 2 or not all(isinstance(x, (int, float)) and x > 0 for x in size):
+            raise ValueError(f"Size for figure '{fig}' must contain two positive numbers (base and height).")
 
-	if fig not in figs:
-		raise ValueError(f"Figure '{fig}' is not a valid figure.")
-	if func not in funcs:
-		raise ValueError(f"Function '{func}' is not a valid function for figure '{fig}'.")
+    result = eval(f'{fig}.{func}(*{size})')
+    return result
 
-	result = eval(f'{fig}.{func}(*{size})')
-	return result
 
 if __name__ == "__main__":
 	func = ''
